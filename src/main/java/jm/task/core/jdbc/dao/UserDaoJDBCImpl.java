@@ -9,9 +9,9 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
     private final static String TABLE_NAME = "Users";
-    Connection connection;
-    Statement statement = null;
-    PreparedStatement preparedStatement = null;
+    private Connection connection;
+    private Statement statement = null;
+    private PreparedStatement preparedStatement = null;
 
     public UserDaoJDBCImpl() {
     }
