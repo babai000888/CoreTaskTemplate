@@ -26,9 +26,7 @@ test.createUsersTable();
     }
 
     public List<User> getAllUsers() {
-
-        test.getAllUsers();
-        return null;
+        return test.getAllUsers();
     }
 
     public void cleanUsersTable() {

@@ -131,7 +131,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.execute(sql);
             System.out.println("Tables cleared");
         } catch (SQLException e) {
-            System.out.println("cleanUsersTable ERROR\n" + e.getMessage());
+            System.out.println("cleanUsersTableс ERROR\n" + e.getMessage());
         } finally {
             closeConnection();
         }
