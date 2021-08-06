@@ -27,6 +27,13 @@ public class User {
         this.lastName = lastName;
         this.age = age;
     }
+    @Override
+    public String toString() {
+        return "id: " + this.id +
+                " name: " + this.name +
+                " lastName: " + this.lastName +
+                " age: " +age;
+    }
 
     public Long getId() {
         return id;

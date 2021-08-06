@@ -9,7 +9,7 @@ public class Util {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String USR = "root";
     static final String PWD = "000888";
-    static final String URL = "jdbc:mysql://localhost:3306/testDB";
+    static final String URL = "jdbc:mysql://localhost:3306/CoreTaskTemplate?useUnicode=true&characterEncoding=utf8";
     static Connection connection = null;
     public static Connection getConnection() {
         try {
