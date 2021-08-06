@@ -9,9 +9,9 @@ import jm.task.core.jdbc.dao.*;
 import java.sql.SQLException;
 
 public class Main{
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         // реализуйте алгоритм здесь
-UserDao test = new UserDaoJDBCImpl();
+UserService test = new UserServiceImpl();
 
 test.createUsersTable();
 test.saveUser("Дао","Юззер",(byte)23);
@@ -19,9 +19,7 @@ test.saveUser("Мумий","Троль",(byte)23);
 test.saveUser("Ким","Чен",(byte)23);
 test.saveUser("Тип","Топ",(byte)23);
 test.removeUserById(7);
-for (User user : test.getAllUsers()) {
-    System.out.println(user.toString());
-}
+test.getAllUsers();
 test.cleanUsersTable();
 test.dropUsersTable();
 
