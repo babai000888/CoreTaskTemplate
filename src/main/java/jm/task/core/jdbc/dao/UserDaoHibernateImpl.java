@@ -12,7 +12,12 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
-
+        String sql = "CREATE TABLE Users " +
+                "(id INTEGER not NULL, " +
+                " first VARCHAR(255), " +
+                " last VARCHAR(255), " +
+                " age INTEGER, " +
+                " PRIMARY KEY ( id ))";
     }
 
     @Override
