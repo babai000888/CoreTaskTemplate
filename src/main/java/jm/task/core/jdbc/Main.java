@@ -1,34 +1,28 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
-import jm.task.core.jdbc.util.Util;
-import jm.task.core.jdbc.dao.*;
+
 
 import java.sql.SQLException;
 
 public class Main{
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
-UserService test = new UserServiceImpl();
+        final UserService userService = new UserServiceImpl();
 
-test.createUsersTable();
-test.saveUser("Дао","Юззер",(byte)23);
-test.saveUser("Мумий","Троль",(byte)23);
-test.saveUser("Ким","Чен",(byte)23);
-test.saveUser("Тип","Топ",(byte)23);
-test.removeUserById(7);
-test.getAllUsers();
-test.cleanUsersTable();
-test.dropUsersTable();
+        userService.createUsersTable();
+        userService.saveUser("Дао","Юззер",(byte)23);
+        userService.saveUser("Мумий","Троль",(byte)23);
+        userService.saveUser("Ким","Чен",(byte)23);
+        userService.saveUser("Тип","Топ",(byte)23);
+        userService.getAllUsers();
+        userService.removeUserById(2);
+        userService.getAllUsers();
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
 
-
-
-
-
-
-
-
+        System.out.println("Main is finished");
     }
 }
+
