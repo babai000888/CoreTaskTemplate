@@ -51,7 +51,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        String sql = "DELETE FROM Users WHERE `id` IN (?) ";
+        String sql = "DELETE FROM Users WHERE `id` = ? ";
         try ( PreparedStatement preparedStatement = Util.getConnection().prepareStatement(sql) ){
             preparedStatement.setString(1, Long.toString(id));
             preparedStatement.executeUpdate();
