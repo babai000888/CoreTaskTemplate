@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private Connection connection;
-    private Statement statement = null;
-    private PreparedStatement preparedStatement = null;
 
     public UserDaoJDBCImpl() {
     }
@@ -22,11 +19,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 "  `lastName` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL," +
                 "  `age` SMALLINT NULL," +
                 "  PRIMARY KEY (`id`))";
-        if(connection == null) {
-            connection = Util.getConnection();
-        }
-        try {
-            statement = connection.createStatement();
+        try ( Statement statement = Util.getConnection().createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
             System.out.println(" createUsersTable ERROR\n" + e.getMessage());
@@ -35,11 +28,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void dropUsersTable() {
         String sql = "DROP TABLE IF EXISTS Users";
-        if(connection == null) {
-            connection = Util.getConnection();
-        }
-        try {
-            statement = connection.createStatement();
+        try ( Statement statement = Util.getConnection().createStatement()){
             statement.execute(sql);
         } catch (SQLException e) {
             System.out.println("dropUsersTable ERROR\n" + e.getMessage());
@@ -51,11 +40,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String sql = "INSERT INTO Users" +
                 " (`id`, `name`, `lastName`, `age`) " +
                 "   VALUES (DEFAULT, ?, ?, ?)";
-        if(connection == null) {
-            connection = Util.getConnection();
-        }
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try ( PreparedStatement preparedStatement = Util.getConnection().prepareStatement(sql) ){
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
@@ -66,13 +51,10 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        String sql = "DELETE FROM Users WHERE id = (" + id + ")";
-        if(connection == null) {
-            connection = Util.getConnection();
-        }
-        try {
-            statement = connection.createStatement();
-            statement.execute(sql);
+        String sql = "DELETE FROM Users WHERE `id` IN (?) ";
+        try ( PreparedStatement preparedStatement = Util.getConnection().prepareStatement(sql) ){
+            preparedStatement.setString(1, Long.toString(id));
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("removeUserById ERROR\n" + e.getMessage());
         }
@@ -81,12 +63,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
         String sql = "SELECT * FROM Users";
-        if(connection == null) {
-            connection = Util.getConnection();
-        }
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+        try ( ResultSet resultSet = Util.getConnection().createStatement().executeQuery(sql) ){
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getLong("id"));
@@ -103,11 +80,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void cleanUsersTable() {
         String sql = "TRUNCATE TABLE Users";
-        if(connection == null) {
-            connection = Util.getConnection();
-        }
-        try {
-            statement = connection.createStatement();
+        try ( Statement statement = Util.getConnection().createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
             System.out.println("cleanUsersTable ERROR\n" + e.getMessage());

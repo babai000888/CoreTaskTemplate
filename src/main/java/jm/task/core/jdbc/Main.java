@@ -18,6 +18,7 @@ public class Main{
         userService.saveUser("Тип","Топ",(byte)23);
         userService.getAllUsers();
         userService.removeUserById(2);
+        System.out.println();
         userService.getAllUsers();
         userService.cleanUsersTable();
         userService.dropUsersTable();
